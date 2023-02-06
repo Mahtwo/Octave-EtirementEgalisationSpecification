@@ -24,9 +24,7 @@ function Ietirement = etirement (I)
 
     a = (255 - 0) / (amax - amin); % coefficient directeur
     b = amin; % ordonnée à l'origine
-    for i = amin:amax % calcul de la courbe entre amin et amax
-      LUT(i, 1) = (i - amin) * a;
-    endfor
+    LUT(amin:amax) = ((amin:amax) - amin) * a; % calcul de la courbe entre amin et amax
 
     LUT(amax:end) = 255; % passage des valeurs après amax à 255
 
