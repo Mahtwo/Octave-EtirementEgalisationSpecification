@@ -40,14 +40,15 @@ function Ietirement = etirement (I)
     title(strcat(['min = ', num2str(min(min(Ietirement))), ' max = ', num2str(max(max(Ietirement)))])); % a la fin du subplot
     subplot(3, 2, 3); %sélectionne le troisème cadran de la fenêtre
     imhist(I);
+    axis([-inf +inf -inf +inf]); %spécifie l'axis par défaut, sinon ça utilise l'axis du LUT
     subplot(3, 2, 4); %sélectionne le quatrième cadran de la fenêtre
     imhist(Ietirement);
+    axis([-inf +inf -inf +inf]); %spécifie l'axis par défaut, sinon ça utilise l'axis du LUT
     subplot(3, 2, 5:6); %sélectionne le cinquième cadran de la fenêtre
     plot(LUT);
-    axis([0 255 0 255]);
     xlabel('NG entrée');
     ylabel('NG sortie');
     title(strcat(['LUT - a = ', num2str(a), ' b = ', num2str(b)])); % a la fin du subplot
-
+    axis([0 255 0 255]);
 end
 
