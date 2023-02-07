@@ -55,33 +55,35 @@ function NGegalisation = egalisation (I)
 
     subplot(4, 2, 1); %sélectionne le premier cadran de la fenêtre
     imshow(I);
-    %title(strcat(['min = ', num2str(amin), ' max = ', num2str(amax)])); % a la fin du subplot
+    title(strcat(['min = ', num2str(min(min(I))), ' max = ', num2str(max(max(I)))]));
 
     subplot(4, 2, 2); %sélectionne le deuxieme cadran de la fenêtre
     imshow(Iegalisation)
-    %title(strcat(['min = ', num2str(min(min(Ietirement))), ' max = ', num2str(max(max(Ietirement)))])); % a la fin du subplot
+    title(strcat(['min = ', num2str(min(min(Iegalisation))), ' max = ', num2str(max(max(Iegalisation)))]));
 
     subplot(4, 2, 3); %sélectionne le troisème cadran de la fenêtre
     imhist(I);
-    axis([-inf +inf -inf +inf]); %spécifie l'axis par défaut, sinon ça utilise l'axis du LUT
+    axis([-inf +inf -inf +inf]);
     title("Histogramme image base (axes complets)");
 
     subplot(4, 2, 4); %sélectionne le quatrième cadran de la fenêtre
     imhist(Iegalisation);
-    axis([-inf +inf -inf +inf]); %spécifie l'axis par défaut, sinon ça utilise l'axis du LUT
+    axis([-inf +inf -inf +inf]);
     title("Histogramme image égalisée (axes complets)");
 
     subplot(4, 2, 5); %sélectionne le cinquième cadran de la fenêtre
     imhist(I);
+    axis([-inf +inf 0 100]);
     title("Histogramme image base (axes tronqués)");
 
     subplot(4, 2, 6); %sélectionne le sixième cadran de la fenêtre
     imhist(Iegalisation);
+    axis([-inf +inf 0 100]);
     title("Histogramme image égalisée (axes tronqués)");
 
     subplot(4, 2, 7); %sélectionne le cinquième cadran de la fenêtre
     plot(LUTng);
-    axis([1 256 0 255]);
+    axis([1 256 0 255]); % Index allant de 1 à 256
     xlabel('NG entrée');
     ylabel('NG sortie');
     title("LUT");
@@ -89,7 +91,7 @@ function NGegalisation = egalisation (I)
     subplot(4, 2, 8); %sélectionne le sixième cadran de la fenêtre
     plot(HCNcumule);
     title("HCN de l'image égalisée");
-    axis([1 256 0 1]);
+    axis([1 256 0 1]); % Index allant de 1 à 256
 
 end
 
