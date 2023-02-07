@@ -22,11 +22,11 @@ function Ietirement = etirement (I)
     % -----------------
     LUT = zeros(256, 1); % initialisation à 0
 
-    a = (255 - 0) / (amax - amin); % coefficient directeur
+    a = (255 - 0) / (amax - amin); % coefficient directeur : (x2 - x1) / (y2 - y1)
     b = amin; % ordonnée à l'origine
     LUT((amin:amax) + 1) = ((amin:amax) - amin + 1) * a; % calcul de la courbe entre amin et amax
 
-    LUT(amax:end) = 255; % passage des valeurs après amax à 255
+    LUT((amax + 1):end) = 255; % passage des valeurs après amax à 255
 
     % ---------
     % affichage
@@ -63,6 +63,6 @@ function Ietirement = etirement (I)
     xlabel('NG entrée');
     ylabel('NG sortie');
     title(strcat(['LUT - a = ', num2str(a), ' b = ', num2str(b)])); % a la fin du subplot
-    axis([0 255 0 255]);
+    axis([1 256 0 255]); % Index allant de 1 à 256
 end
 
