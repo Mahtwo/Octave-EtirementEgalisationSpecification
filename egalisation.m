@@ -1,4 +1,4 @@
-function NGegalisation = egalisation (I)
+function Iegalisation = egalisation (I)
     [nbLignes, nbColonnes, can] = size(I); % m=nb lignes, n=nb colonnes, can=nb canaux
     if(can > 1)
         I = rgb2gray(I); % si l’image est en couleur, la transformer en NG
