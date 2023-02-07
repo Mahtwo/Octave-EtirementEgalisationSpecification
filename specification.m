@@ -16,8 +16,8 @@ function Ispecification = specification (Ix, Iz)
     % -------------------------------------------
 
     % Fonction HC declaré en dessous de specification
-    HC_x = HC(Ix);
-    HC_z = HC(Iz);
+    HC_x = calculHC(Ix);
+    HC_z = calculHC(Iz);
 
     % --------------------------------------------------
     % Application des niveaux de gris de quantité proche
@@ -49,13 +49,13 @@ function Ispecification = specification (Ix, Iz)
     title("Histogramme image de référence");
 
     subplot(4, 2, 5); %sélectionne le cinquième cadran de la fenêtre
-    %imhist(Ix);
-    %axis([-inf +inf -inf +inf]);
+    plot(HC_x);
+    axis([-inf +inf -inf +inf]);
     title("Histogramme cumulée image source");
 
     subplot(4, 2, 6); %sélectionne le sixième cadran de la fenêtre
-    %imhist(Iz);
-    %axis([-inf +inf -inf +inf]);
+    plot(HC_z);
+    axis([-inf +inf -inf +inf]);
     title("Histogramme cumulée image de référence");
 
     subplot(4, 2, 7); %sélectionne le cinquième cadran de la fenêtre
@@ -69,7 +69,7 @@ function Ispecification = specification (Ix, Iz)
 end
 
 function HC = calculHC (I)
-    [nbLignes_ix, nbColonnes_ix] = size(I);
+    [nbLignes, nbColonnes] = size(I);
 
     % -----------------------------------------------------------------------------------
     % Calcul du nombre d'occurence de chaque niveau de gris de l'image (pour chaque pixel)
