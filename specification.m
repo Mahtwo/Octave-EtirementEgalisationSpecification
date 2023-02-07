@@ -23,10 +23,7 @@ function Ispecification = specification (Ix, Iz)
     % Application des niveaux de gris de quantité proche
     % --------------------------------------------------
 
-    % TODO : Pour chaque niveau de gris dans l'image source, calculer sa quantité,
-    % puis calculer sa différence avec tous les quantité de niveau de gris de
-    % l'image de référence, pour ensuite prendre le niveau de gris de l'image
-    % de référence avec la plus petite différence
+    % TODO : Voir l'exemple du pdf
 
     % ---------
     % affichage
