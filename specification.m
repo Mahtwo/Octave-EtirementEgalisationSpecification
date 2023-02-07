@@ -24,35 +24,16 @@ function Ispecification = specification (Ix, Iz)
     LUT = zeros(256, 1, 'uint8');
 
     for i = 1:256
-        if HC_x(i, 1) != 0 % ne pas traiter avant d'obtenir le premier cumul
-            valeur = -1;
-            valeurTemp = -1;
-            diff = -1;
-            for j = i:256
-                curVal = HC_z(j, 1);
-                if HC_x(i, 1) == curVal % cas où c'est égal
-                    valeur = curVal;
-                    break;
-                endif
-                if HC_x(i, 1) < curVal
-                    diff = curVal - HC_x(i, 1);
-                    valeurTemp = curVal;
-                endif
-                if HC_x(i, 1) > curVal
-                    if diff < (HC_x(i, 1) - curVal)
-                        valeur = valeurTemp;
-                        break;
-                    endif
-                    if diff > (HC_x(i, 1) - curVal)
-                        valeur = curVal;
-                        break;
-                    endif
-                endif
-            endfor
-        else
-            valeur = 0;
-        endif
-        LUT(i, 1) = valeur;
+        iNGC = HC_x(i);
+        diff = realmax;
+        for j = 1:256
+            jNGC = HC_z(j);
+            if abs(iNGC - jNGC) < diff
+                diff = abs(iNGC - jNGC);
+                nouveauNG = j - 1;
+            endif
+        endfor
+        LUT(i) = nouveauNG;
     endfor
 
     Ispecification = intlut(Ix, LUT);
