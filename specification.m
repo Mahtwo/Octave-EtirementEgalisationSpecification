@@ -11,6 +11,23 @@ function Ispecification = specification (Ix, Iz)
 
     Ispecification = zeros(nbLignes_ix, nbColonnes_ix);
 
+    % -------------------------------------------
+    % Calcul de l'histogramme cumulé des 2 images
+    % -------------------------------------------
+
+    % Fonction HC declaré en dessous de specification
+    HC_x = HC(Ix);
+    HC_z = HC(Iz);
+
+    % --------------------------------------------------
+    % Application des niveaux de gris de quantité proche
+    % --------------------------------------------------
+
+    % TODO : Pour chaque niveau de gris dans l'image source, calculer sa quantité,
+    % puis calculer sa différence avec tous les quantité de niveau de gris de
+    % l'image de référence, pour ensuite prendre le niveau de gris de l'image
+    % de référence avec la plus petite différence
+
     % ---------
     % affichage
     % ---------
@@ -52,5 +69,10 @@ function Ispecification = specification (Ix, Iz)
     %imhist(Ispecification);
     title("Histogramme de l'image obtenue par la spécification");
     %axis([-inf +inf -inf +inf]);
+end
+
+function HC = calculHC (I)
+    HC = zeros(1,1);
+    % TODO : Implémenter
 end
 
