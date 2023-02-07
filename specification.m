@@ -9,8 +9,6 @@ function Ispecification = specification (Ix, Iz)
         Iz = rgb2gray(Iz); % si l’image est en couleur, la transformer en NG
     end
 
-    Ispecification = zeros(nbLignes_ix, nbColonnes_ix);
-
     % -------------------------------------------
     % Calcul de l'histogramme cumulé des 2 images
     % -------------------------------------------
@@ -23,7 +21,7 @@ function Ispecification = specification (Ix, Iz)
     % Application des niveaux de gris de quantité proche
     % --------------------------------------------------
 
-    LUT = zeros(256, 1);
+    LUT = zeros(256, 1, 'uint8');
 
     for i = 1:256
         if HC_x(i, 1) != 0 % ne pas traiter avant d'obtenir le premier cumul
@@ -31,7 +29,7 @@ function Ispecification = specification (Ix, Iz)
             valeurTemp = -1;
             diff = -1;
             for j = i:256
-                curVal = Hc_z(j, 1);
+                curVal = HC_z(j, 1);
                 if HC_x(i, 1) == curVal % cas où c'est égal
                     valeur = curVal;
                     break;
@@ -56,6 +54,8 @@ function Ispecification = specification (Ix, Iz)
         endif
         LUT(i, 1) = valeur;
     endfor
+
+    Ispecification = intlut(Ix, LUT);
 
     % ---------
     % affichage
@@ -95,9 +95,9 @@ function Ispecification = specification (Ix, Iz)
     title("Image obtenue par la spécification");
 
     subplot(4, 2, 8); %sélectionne le sixième cadran de la fenêtre
-    %imhist(Ispecification);
+    imhist(Ispecification);
     title("Histogramme de l'image obtenue par la spécification");
-    %axis([-inf +inf -inf +inf]);
+    axis([-inf +inf -inf +inf]);
 end
 
 function HC = calculHC (I)
