@@ -69,14 +69,13 @@ function NGegalisation = egalisation (I)
 
     subplot(3, 2, 5); %sélectionne le cinquième cadran de la fenêtre
     plot(LUTng);
-    axis([0 255 0 255]);
+    axis([1 256 0 255]);
     xlabel('NG entrée');
     ylabel('NG sortie');
-    title(strcat(['LUT - a = ', num2str(a), ' b = ', num2str(b)])); % a la fin du subplot
 
     subplot(3, 2, 6); %sélectionne le sixième cadran de la fenêtre
     plot(HCNcumule);
-    axis([0 300 0 1]);
+    axis([1 256 0 1]);
 
 end
 
