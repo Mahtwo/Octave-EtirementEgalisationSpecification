@@ -21,10 +21,7 @@ function NGegalisation = egalisation (I)
     % Calcul de la densité de probabilité
     % -----------------------------------
 
-    densiteProba = zeros(256, 1, 'double');
-    for i = 1:256
-        densiteProba(i, 1) = nbOccurenceNG(i, 1) / totalOccurence;
-    endfor
+    densiteProba = nbOccurenceNG / totalOccurence;
 
     % -----------------------------------------------
     % Calcul des HCN cumulés pour chaque probabilités
@@ -40,19 +37,13 @@ function NGegalisation = egalisation (I)
     % Calcul des NG après égalisation
     % -------------------------------
 
-    NGegalisation = zeros(256, 1);
-    for i = 2:256
-        NGegalisation(i, 1) = floor(255 * HCNcumule(i, 1));
-    endfor
+    NGegalisation = floor(255 * HCNcumule);
 
     % ------------------
     % Application du LUT
     % ------------------
 
-    LUTng = zeros(256, 1, 'uint8');
-    for i = 1:256
-        LUTng(i, 1) = NGegalisation(i, 1);
-    endfor
+    LUTng = cast(NGegalisation,'uint8');
 
 
     Iegalisation = intlut(I, LUTng);
