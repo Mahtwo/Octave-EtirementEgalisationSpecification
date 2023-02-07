@@ -7,8 +7,8 @@ function Ietirement = etirement (I)
     % ----------------------
     % Debut Calcul Etirement
     % ----------------------
-    amin = min(min(I)) + 1; % niveau de gris minimum de I
-    amax = max(max(I)) + 1; % niveau de gris maximum de I
+    amin = min(min(I)); % niveau de gris minimum de I
+    amax = max(max(I)); % niveau de gris maximum de I
 
     Ietirement = zeros(nbLignes, nbColonnes); % image après étirement
 
@@ -24,7 +24,7 @@ function Ietirement = etirement (I)
 
     a = (255 - 0) / (amax - amin); % coefficient directeur
     b = amin; % ordonnée à l'origine
-    LUT(amin:amax) = ((amin:amax) - amin) * a; % calcul de la courbe entre amin et amax
+    LUT((amin:amax) + 1) = ((amin:amax) - amin + 1) * a; % calcul de la courbe entre amin et amax
 
     LUT(amax:end) = 255; % passage des valeurs après amax à 255
 
