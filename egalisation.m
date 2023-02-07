@@ -5,7 +5,7 @@ function Iegalisation = egalisation (I)
     end
 
     % -----------------------------------------------------------------------------------
-    % Calcul du nombre d'occrence de chaque niveau de gris de l'image (pour chaque pixel)
+    % Calcul du nombre d'occurence de chaque niveau de gris de l'image (pour chaque pixel)
     % -----------------------------------------------------------------------------------
 
     nbOccurenceNG = zeros(256, 1);
