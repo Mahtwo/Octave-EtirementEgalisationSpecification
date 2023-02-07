@@ -34,35 +34,37 @@ function Ietirement = etirement (I)
     figure;
     subplot(4, 2, 1); %sélectionne le premier cadran de la fenêtre
     imshow(I);
-    title(strcat(['min = ', num2str(amin), ' max = ', num2str(amax)])); % a la fin du subplot
+    title(strcat(['min = ', num2str(amin), ' max = ', num2str(amax)]));
 
     subplot(4, 2, 2); %sélectionne le deuxieme cadran de la fenêtre
     imshow(Ietirement);
-    title(strcat(['min = ', num2str(min(min(Ietirement))), ' max = ', num2str(max(max(Ietirement)))])); % a la fin du subplot
+    title(strcat(['min = ', num2str(min(min(Ietirement))), ' max = ', num2str(max(max(Ietirement)))]));
 
     subplot(4, 2, 3); %sélectionne le troisème cadran de la fenêtre
     imhist(I);
-    axis([-inf +inf -inf +inf]); %spécifie l'axis par défaut, sinon ça utilise l'axis du LUT
+    axis([-inf +inf -inf +inf]);
     title("Histogramme image base (axes complets)");
 
     subplot(4, 2, 4); %sélectionne le quatrième cadran de la fenêtre
     imhist(Ietirement);
-    axis([-inf +inf -inf +inf]); %spécifie l'axis par défaut, sinon ça utilise l'axis du LUT
+    axis([-inf +inf -inf +inf]);
     title("Histogramme image étirée (axes complets)");
 
     subplot(4, 2, 5); %sélectionne le cinquième cadran de la fenêtre
     imhist(I);
+    axis([-inf +inf 0 100]);
     title("Histogramme image base (axes tronqués)");
 
     subplot(4, 2, 6); %sélectionne le sixième cadran de la fenêtre
     imhist(Ietirement);
+    axis([-inf +inf 0 100]);
     title("Histogramme image étirée (axes tronqués)");
 
     subplot(4, 2, 7:8); %sélectionne le 7ème et 8ème cadran de la fenêtre
     plot(LUT);
     xlabel('NG entrée');
     ylabel('NG sortie');
-    title(strcat(['LUT - a = ', num2str(a), ' b = ', num2str(b)])); % a la fin du subplot
+    title(strcat(['LUT - a = ', num2str(a), ' b = ', num2str(b)]));
     axis([1 256 0 255]); % Index allant de 1 à 256
 end
 
