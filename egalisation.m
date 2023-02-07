@@ -13,7 +13,7 @@ function NGegalisation = egalisation (I)
 
     for i = 1:nbLignes
         for j = 1:nbColonnes
-            nbOccurenceNG(I(i, j)) = nbOccurenceNG(I(i, j)) +1;
+            nbOccurenceNG(I(i, j) + 1) = nbOccurenceNG(I(i, j) + 1) +1;
         endfor
     endfor
 
