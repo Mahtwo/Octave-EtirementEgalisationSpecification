@@ -4,10 +4,9 @@ function Iegalisation = egalisation (I)
         I = rgb2gray(I); % si l’image est en couleur, la transformer en NG
     end
 
-    % -----------------------------------------------------------------------------------
-    % Calcul du nombre d'occurence de chaque niveau de gris de l'image (pour chaque pixel)
-    % -----------------------------------------------------------------------------------
-
+    % ----------------------------------------------------------------
+    % Calcul du nombre d'occurences de chaque niveau de gris de l'image
+    % ----------------------------------------------------------------
     nbOccurenceNG = zeros(256, 1);
     totalOccurence = nbLignes * nbColonnes;
 
@@ -20,36 +19,32 @@ function Iegalisation = egalisation (I)
     % -----------------------------------
     % Calcul de la densité de probabilité
     % -----------------------------------
-
     densiteProba = nbOccurenceNG / totalOccurence;
 
-    % -----------------------------------------------
-    % Calcul des HCN cumulés pour chaque probabilités
-    % -----------------------------------------------
-
-    HCNcumule = zeros(256, 1);
-    HCNcumule(1, 1) = densiteProba(1, 1); % floor arrondis a l'entier inférieur
+    % ----------------------------------------
+    % Calcul de l'histogramme cumulé normalisé
+    % ----------------------------------------
+    HCN = zeros(256, 1);
+    HCN(1, 1) = densiteProba(1, 1);
     for i = 2:256
-        HCNcumule(i, 1) = densiteProba(i, 1) + HCNcumule(i - 1, 1);
+        HCN(i, 1) = densiteProba(i, 1) + HCN(i - 1, 1);
     endfor
 
-    % -------------------------------
-    % Calcul des NG après égalisation
-    % -------------------------------
-
-    NGegalisation = floor(255 * HCNcumule);
+    % --------------------------------------------
+    % Calcul des niveaux de gris après égalisation
+    % --------------------------------------------
+    NGegalisation = floor(255 * HCN);
 
     % ------------------
     % Application du LUT
     % ------------------
-
     LUTng = cast(NGegalisation,'uint8');
 
 
     Iegalisation = intlut(I, LUTng);
 
     % ---------
-    % affichage
+    % Affichage
     % ---------
     figure;
 
@@ -57,11 +52,11 @@ function Iegalisation = egalisation (I)
     imshow(I);
     title(strcat(['min = ', num2str(min(min(I))), ' max = ', num2str(max(max(I)))]));
 
-    subplot(4, 2, 2); %sélectionne le deuxieme cadran de la fenêtre
+    subplot(4, 2, 2); %sélectionne le deuxième cadran de la fenêtre
     imshow(Iegalisation)
     title(strcat(['min = ', num2str(min(min(Iegalisation))), ' max = ', num2str(max(max(Iegalisation)))]));
 
-    subplot(4, 2, 3); %sélectionne le troisème cadran de la fenêtre
+    subplot(4, 2, 3); %sélectionne le troisième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf -inf +inf]);
     title("Histogramme image base (axes complets)");
@@ -81,15 +76,15 @@ function Iegalisation = egalisation (I)
     axis([-inf +inf 0 100]);
     title("Histogramme image égalisée (axes tronqués)");
 
-    subplot(4, 2, 7); %sélectionne le cinquième cadran de la fenêtre
+    subplot(4, 2, 7); %sélectionne le septième cadran de la fenêtre
     plot(LUTng);
     axis([1 256 0 255]); % Index allant de 1 à 256
     xlabel('NG entrée');
     ylabel('NG sortie');
     title("LUT");
 
-    subplot(4, 2, 8); %sélectionne le sixième cadran de la fenêtre
-    plot(HCNcumule);
+    subplot(4, 2, 8); %sélectionne le huitième cadran de la fenêtre
+    plot(HCN);
     title("HCN de l'image égalisée");
     axis([1 256 0 1]); % Index allant de 1 à 256
 
