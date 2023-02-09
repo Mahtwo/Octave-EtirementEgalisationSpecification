@@ -2,8 +2,8 @@ function [im1, im2] = init(filename);
     pkg load image
     % si pas de fichier specifié, prends image_test_bruit.tif
     if not(exist('filename')) || isempty(filename)
-        im1 = imread('lena_fc.png');
-        im2 = imread('outils.png');
+        im1 = imread('lena256.png');
+        im2 = imread('lena_fc.png');
     else
         im1 = imread(filename);
     end
