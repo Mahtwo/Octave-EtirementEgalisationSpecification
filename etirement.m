@@ -5,7 +5,7 @@ function Ietirement = etirement (I)
     end
 
     % ----------------------
-    % Debut Calcul Etirement
+    % Début calcul étirement
     % ----------------------
     amin = min(min(I)); % niveau de gris minimum de I
     amax = max(max(I)); % niveau de gris maximum de I
@@ -29,18 +29,18 @@ function Ietirement = etirement (I)
     LUT((amax + 1):end) = 255; % passage des valeurs après amax à 255
 
     % ---------
-    % affichage
+    % Affichage
     % ---------
     figure;
     subplot(4, 2, 1); %sélectionne le premier cadran de la fenêtre
     imshow(I);
     title(strcat(['min = ', num2str(amin), ' max = ', num2str(amax)]));
 
-    subplot(4, 2, 2); %sélectionne le deuxieme cadran de la fenêtre
+    subplot(4, 2, 2); %sélectionne le deuxième cadran de la fenêtre
     imshow(Ietirement);
     title(strcat(['min = ', num2str(min(min(Ietirement))), ' max = ', num2str(max(max(Ietirement)))]));
 
-    subplot(4, 2, 3); %sélectionne le troisème cadran de la fenêtre
+    subplot(4, 2, 3); %sélectionne le troisième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf -inf +inf]);
     title("Histogramme image base (axes complets)");
@@ -60,7 +60,7 @@ function Ietirement = etirement (I)
     axis([-inf +inf 0 100]);
     title("Histogramme image étirée (axes tronqués)");
 
-    subplot(4, 2, 7:8); %sélectionne le 7ème et 8ème cadran de la fenêtre
+    subplot(4, 2, 7:8); %sélectionne le septième et huitième cadran de la fenêtre
     plot(LUT);
     xlabel('NG entrée');
     ylabel('NG sortie');

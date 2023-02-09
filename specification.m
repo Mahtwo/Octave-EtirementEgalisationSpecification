@@ -13,14 +13,13 @@ function Ispecification = specification (Ix, Iz)
     % Calcul de l'histogramme cumulé des 2 images
     % -------------------------------------------
 
-    % Fonction HC declaré en dessous de specification
+    % Fonction calculHC déclarée en dessous de specification
     HC_x = calculHC(Ix);
     HC_z = calculHC(Iz);
 
     % --------------------------------------------------
     % Application des niveaux de gris de quantité proche
     % --------------------------------------------------
-
     LUT = zeros(256, 1, 'uint8');
 
     for i = 1:256
@@ -39,7 +38,7 @@ function Ispecification = specification (Ix, Iz)
     Ispecification = intlut(Ix, LUT);
 
     % ---------
-    % affichage
+    % Affichage
     % ---------
     figure;
 
@@ -47,11 +46,11 @@ function Ispecification = specification (Ix, Iz)
     imshow(Ix);
     title("Image source");
 
-    subplot(4, 2, 2); %sélectionne le deuxieme cadran de la fenêtre
+    subplot(4, 2, 2); %sélectionne le deuxième cadran de la fenêtre
     imshow(Iz)
     title("Image de référence");
 
-    subplot(4, 2, 3); %sélectionne le troisème cadran de la fenêtre
+    subplot(4, 2, 3); %sélectionne le troisième cadran de la fenêtre
     imhist(Ix);
     axis([-inf +inf -inf +inf]);
     title("Histogramme image source");
@@ -64,18 +63,18 @@ function Ispecification = specification (Ix, Iz)
     subplot(4, 2, 5); %sélectionne le cinquième cadran de la fenêtre
     plot(HC_x);
     axis([-inf +inf -inf +inf]);
-    title("Histogramme cumulée image source");
+    title("Histogramme cumulé image source");
 
     subplot(4, 2, 6); %sélectionne le sixième cadran de la fenêtre
     plot(HC_z);
     axis([-inf +inf -inf +inf]);
-    title("Histogramme cumulée image de référence");
+    title("Histogramme cumulé image de référence");
 
-    subplot(4, 2, 7); %sélectionne le cinquième cadran de la fenêtre
+    subplot(4, 2, 7); %sélectionne le septième cadran de la fenêtre
     imshow(Ispecification);
     title("Image obtenue par la spécification");
 
-    subplot(4, 2, 8); %sélectionne le sixième cadran de la fenêtre
+    subplot(4, 2, 8); %sélectionne le huitième cadran de la fenêtre
     imhist(Ispecification);
     title("Histogramme de l'image obtenue par la spécification");
     axis([-inf +inf -inf +inf]);
@@ -84,10 +83,9 @@ end
 function HC = calculHC (I)
     [nbLignes, nbColonnes] = size(I);
 
-    % -----------------------------------------------------------------------------------
-    % Calcul du nombre d'occurence de chaque niveau de gris de l'image (pour chaque pixel)
-    % -----------------------------------------------------------------------------------
-
+    % ----------------------------------------------------------------
+    % Calcul du nombre d'occurences de chaque niveau de gris de l'image
+    % ----------------------------------------------------------------
     nbOccurenceNG = zeros(256, 1);
 
     for i = 1:nbLignes
@@ -99,7 +97,6 @@ function HC = calculHC (I)
     % ------------------------------
     % Calcul de l'histogramme cumulé
     % ------------------------------
-
     HC(1, 1) = nbOccurenceNG(1, 1);
     for i = 2:256
         HC(i, 1) = nbOccurenceNG(i, 1) + HC(i - 1, 1);
