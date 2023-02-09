@@ -89,7 +89,6 @@ function HC = calculHC (I)
     % -----------------------------------------------------------------------------------
 
     nbOccurenceNG = zeros(256, 1);
-    totalOccurence = nbLignes * nbColonnes;
 
     for i = 1:nbLignes
         for j = 1:nbColonnes
