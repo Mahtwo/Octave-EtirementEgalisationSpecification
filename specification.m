@@ -91,7 +91,7 @@ function HC = calculHC (I)
 
     for i = 1:nbLignes
         for j = 1:nbColonnes
-            nbOccurencesNG(I(i, j) + 1) = nbOccurencesNG(I(i, j) + 1) +1;
+            nbOccurencesNG(I(i, j) + 1) = nbOccurencesNG(I(i, j) + 1) + 1;
         endfor
     endfor
 
