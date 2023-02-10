@@ -7,19 +7,19 @@ function Iegalisation = egalisation (I)
     % ----------------------------------------------------------------
     % Calcul du nombre d'occurences de chaque niveau de gris de l'image
     % ----------------------------------------------------------------
-    nbOccurenceNG = zeros(256, 1);
-    totalOccurence = nbLignes * nbColonnes;
+    nbOccurencesNG = zeros(256, 1);
+    totalOccurences = nbLignes * nbColonnes;
 
     for i = 1:nbLignes
         for j = 1:nbColonnes
-            nbOccurenceNG(I(i, j) + 1) = nbOccurenceNG(I(i, j) + 1) +1;
+            nbOccurencesNG(I(i, j) + 1) = nbOccurencesNG(I(i, j) + 1) +1;
         endfor
     endfor
 
     % -----------------------------------
     % Calcul de la densité de probabilité
     % -----------------------------------
-    densiteProba = nbOccurenceNG / totalOccurence;
+    densiteProba = nbOccurencesNG / totalOccurences;
 
     % ----------------------------------------
     % Calcul de l'histogramme cumulé normalisé

@@ -87,20 +87,20 @@ function HC = calculHC (I)
     % ----------------------------------------------------------------
     % Calcul du nombre d'occurences de chaque niveau de gris de l'image
     % ----------------------------------------------------------------
-    nbOccurenceNG = zeros(256, 1);
+    nbOccurencesNG = zeros(256, 1);
 
     for i = 1:nbLignes
         for j = 1:nbColonnes
-            nbOccurenceNG(I(i, j) + 1) = nbOccurenceNG(I(i, j) + 1) +1;
+            nbOccurencesNG(I(i, j) + 1) = nbOccurencesNG(I(i, j) + 1) +1;
         endfor
     endfor
 
     % ------------------------------
     % Calcul de l'histogramme cumulé
     % ------------------------------
-    HC(1, 1) = nbOccurenceNG(1, 1);
+    HC(1, 1) = nbOccurencesNG(1, 1);
     for i = 2:256
-        HC(i, 1) = nbOccurenceNG(i, 1) + HC(i - 1, 1);
+        HC(i, 1) = nbOccurencesNG(i, 1) + HC(i - 1, 1);
     endfor
 end
 
