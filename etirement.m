@@ -32,6 +32,7 @@ function Ietirement = etirement (I)
     % Affichage
     % ---------
     figure;
+
     subplot(4, 2, 1); % Sélectionne le premier cadran de la fenêtre
     imshow(I);
     title(strcat(['min = ', num2str(amin), ' max = ', num2str(amax)]));
