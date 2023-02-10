@@ -1,7 +1,7 @@
 function Iegalisation = egalisation (I)
-    [nbLignes, nbColonnes, can] = size(I); % m=nb lignes, n=nb colonnes, can=nb canaux
+    [nbLignes, nbColonnes, can] = size(I);
     if(can > 1)
-        I = rgb2gray(I); % si l’image est en couleur, la transformer en NG
+        I = rgb2gray(I); % Si l’image est en couleur, la transformer en niveau de gris
     end
 
     % ----------------------------------------------------------------
@@ -38,52 +38,52 @@ function Iegalisation = egalisation (I)
     % ------------------
     % Application du LUT
     % ------------------
-    LUTng = cast(NGegalisation,'uint8');
+    LUT = cast(NGegalisation,'uint8');
 
 
-    Iegalisation = intlut(I, LUTng);
+    Iegalisation = intlut(I, LUT);
 
     % ---------
     % Affichage
     % ---------
     figure;
 
-    subplot(4, 2, 1); %sélectionne le premier cadran de la fenêtre
+    subplot(4, 2, 1); % Sélectionne le premier cadran de la fenêtre
     imshow(I);
     title(strcat(['min = ', num2str(min(min(I))), ' max = ', num2str(max(max(I)))]));
 
-    subplot(4, 2, 2); %sélectionne le deuxième cadran de la fenêtre
+    subplot(4, 2, 2); % Sélectionne le deuxième cadran de la fenêtre
     imshow(Iegalisation)
     title(strcat(['min = ', num2str(min(min(Iegalisation))), ' max = ', num2str(max(max(Iegalisation)))]));
 
-    subplot(4, 2, 3); %sélectionne le troisième cadran de la fenêtre
+    subplot(4, 2, 3); % Sélectionne le troisième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf -inf +inf]);
     title("Histogramme image base (axes complets)");
 
-    subplot(4, 2, 4); %sélectionne le quatrième cadran de la fenêtre
+    subplot(4, 2, 4); % Sélectionne le quatrième cadran de la fenêtre
     imhist(Iegalisation);
     axis([-inf +inf -inf +inf]);
     title("Histogramme image égalisée (axes complets)");
 
-    subplot(4, 2, 5); %sélectionne le cinquième cadran de la fenêtre
+    subplot(4, 2, 5); % Sélectionne le cinquième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf 0 100]);
     title("Histogramme image base (axes tronqués)");
 
-    subplot(4, 2, 6); %sélectionne le sixième cadran de la fenêtre
+    subplot(4, 2, 6); % Sélectionne le sixième cadran de la fenêtre
     imhist(Iegalisation);
     axis([-inf +inf 0 100]);
     title("Histogramme image égalisée (axes tronqués)");
 
-    subplot(4, 2, 7); %sélectionne le septième cadran de la fenêtre
-    plot(LUTng);
+    subplot(4, 2, 7); % Sélectionne le septième cadran de la fenêtre
+    plot(LUT);
     axis([1 256 0 255]); % Index allant de 1 à 256
     xlabel('NG entrée');
     ylabel('NG sortie');
     title("LUT");
 
-    subplot(4, 2, 8); %sélectionne le huitième cadran de la fenêtre
+    subplot(4, 2, 8); % Sélectionne le huitième cadran de la fenêtre
     plot(HCN);
     title("HCN de l'image égalisée");
     axis([1 256 0 1]); % Index allant de 1 à 256
