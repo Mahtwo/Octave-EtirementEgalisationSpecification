@@ -43,7 +43,7 @@ function Ietirement = etirement (I)
     subplot(4, 2, 3); % Sélectionne le troisième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf -inf +inf]);
-    title("Histogramme image base (axes complets)");
+    title("Histogramme image originale (axes complets)");
 
     subplot(4, 2, 4); % Sélectionne le quatrième cadran de la fenêtre
     imhist(Ietirement);
@@ -53,7 +53,7 @@ function Ietirement = etirement (I)
     subplot(4, 2, 5); % Sélectionne le cinquième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf 0 100]);
-    title("Histogramme image base (axes tronqués)");
+    title("Histogramme image originale (axes tronqués)");
 
     subplot(4, 2, 6); % Sélectionne le sixième cadran de la fenêtre
     imhist(Ietirement);
