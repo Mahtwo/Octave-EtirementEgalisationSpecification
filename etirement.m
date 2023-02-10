@@ -33,35 +33,35 @@ function Ietirement = etirement (I)
     % ---------
     figure;
 
-    subplot(4, 2, 1); % Sélectionne le premier cadran de la fenêtre
+    subplot(4, 3, 1); % Sélectionne le premier cadran de la fenêtre
     imshow(I);
-    title(strcat(['min = ', num2str(amin), ' max = ', num2str(amax)]));
+    title({'Image originale', strcat(['min = ', num2str(amin), ' max = ', num2str(amax)])});
 
-    subplot(4, 2, 2); % Sélectionne le deuxième cadran de la fenêtre
+    subplot(4, 3, 2); % Sélectionne le deuxième cadran de la fenêtre
     imshow(Ietirement);
-    title(strcat(['min = ', num2str(min(min(Ietirement))), ' max = ', num2str(max(max(Ietirement)))]));
+    title({'Image étirée', strcat(['min = ', num2str(min(min(Ietirement))), ' max = ', num2str(max(max(Ietirement)))])});
 
-    subplot(4, 2, 3); % Sélectionne le troisième cadran de la fenêtre
+    subplot(4, 3, 4); % Sélectionne le troisième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf -inf +inf]);
     title("Histogramme image originale (axes complets)");
 
-    subplot(4, 2, 4); % Sélectionne le quatrième cadran de la fenêtre
+    subplot(4, 3, 5); % Sélectionne le quatrième cadran de la fenêtre
     imhist(Ietirement);
     axis([-inf +inf -inf +inf]);
     title("Histogramme image étirée (axes complets)");
 
-    subplot(4, 2, 5); % Sélectionne le cinquième cadran de la fenêtre
+    subplot(4, 3, 7); % Sélectionne le cinquième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf 0 100]);
     title("Histogramme image originale (axes tronqués)");
 
-    subplot(4, 2, 6); % Sélectionne le sixième cadran de la fenêtre
+    subplot(4, 3, 8); % Sélectionne le sixième cadran de la fenêtre
     imhist(Ietirement);
     axis([-inf +inf 0 100]);
     title("Histogramme image étirée (axes tronqués)");
 
-    subplot(4, 2, 7:8); % Sélectionne le septième et huitième cadran de la fenêtre
+    subplot(4, 3, 11); % Sélectionne le septième et huitième cadran de la fenêtre
     plot(LUT);
     xlabel('NG entrée');
     ylabel('NG sortie');
