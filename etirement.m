@@ -12,8 +12,8 @@ function Ietirement = etirement (I)
 
     Ietirement = zeros(nbLignes, nbColonnes); % Image après étirement
 
-    amin = cast (amin, "double");
-    amax = cast (amax, "double");
+    amin = cast(amin, "double");
+    amax = cast(amax, "double");
 
     Ietirement = cast(255.0 * (cast(I, "double") - amin) / (amax - amin), "uint8"); % Calcul de l'étirement sur chaque pixel
 
