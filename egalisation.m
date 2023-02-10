@@ -4,36 +4,17 @@ function Iegalisation = egalisation (I)
         I = rgb2gray(I); % Si l’image est en couleur, la transformer en niveau de gris
     end
 
-    % ----------------------------------------------------------------
-    % Calcul du nombre d'occurences de chaque niveau de gris de l'image
-    % ----------------------------------------------------------------
-    nbOccurencesNG = zeros(256, 1);
-    totalOccurences = nbLignes * nbColonnes;
+    % ------------------------------
+    % Calcul de l'histogramme cumulé
+    % ------------------------------
 
-    for i = 1:nbLignes
-        for j = 1:nbColonnes
-            nbOccurencesNG(I(i, j) + 1) = nbOccurencesNG(I(i, j) + 1) +1;
-        endfor
-    endfor
-
-    % -----------------------------------
-    % Calcul de la densité de probabilité
-    % -----------------------------------
-    densiteProba = nbOccurencesNG / totalOccurences;
-
-    % ----------------------------------------
-    % Calcul de l'histogramme cumulé normalisé
-    % ----------------------------------------
-    HCN = zeros(256, 1);
-    HCN(1, 1) = densiteProba(1, 1);
-    for i = 2:256
-        HCN(i, 1) = densiteProba(i, 1) + HCN(i - 1, 1);
-    endfor
+    % Fonction calculHCN déclarée en dessous de egalisation
+    HCNoriginale = calculHCN(I);
 
     % --------------------------------------------
     % Calcul des niveaux de gris après égalisation
     % --------------------------------------------
-    NGegalisation = floor(255 * HCN);
+    NGegalisation = floor(255 * HCNoriginale);
 
     % ------------------
     % Application du LUT
@@ -42,6 +23,7 @@ function Iegalisation = egalisation (I)
 
 
     Iegalisation = intlut(I, LUT);
+    HCNegalisee = calculHCN(Iegalisation);
 
     % ---------
     % Affichage
@@ -84,9 +66,37 @@ function Iegalisation = egalisation (I)
     title("LUT");
 
     subplot(4, 2, 8); % Sélectionne le huitième cadran de la fenêtre
-    plot(HCN);
+    plot(HCNegalisee);
     title("HCN image égalisée");
     axis([1 256 0 1]); % Index allant de 1 à 256
-
 end
 
+function HCN = calculHCN (I)
+    [nbLignes, nbColonnes] = size(I);
+
+    % ----------------------------------------------------------------
+    % Calcul du nombre d'occurences de chaque niveau de gris de l'image
+    % ----------------------------------------------------------------
+    nbOccurencesNG = zeros(256, 1);
+    totalOccurences = nbLignes * nbColonnes;
+
+    for i = 1:nbLignes
+        for j = 1:nbColonnes
+            nbOccurencesNG(I(i, j) + 1) = nbOccurencesNG(I(i, j) + 1) + 1;
+        endfor
+    endfor
+
+    % -----------------------------------
+    % Calcul de la densité de probabilité
+    % -----------------------------------
+    densiteProba = nbOccurencesNG / totalOccurences;
+
+    % ----------------------------------------
+    % Calcul de l'histogramme cumulé normalisé
+    % ----------------------------------------
+    HCN = zeros(256, 1);
+    HCN(1, 1) = densiteProba(1, 1);
+    for i = 2:256
+        HCN(i, 1) = densiteProba(i, 1) + HCN(i - 1, 1);
+    endfor
+end
