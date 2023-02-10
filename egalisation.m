@@ -59,7 +59,7 @@ function Iegalisation = egalisation (I)
     subplot(4, 2, 3); % Sélectionne le troisième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf -inf +inf]);
-    title("Histogramme image base (axes complets)");
+    title("Histogramme image originale (axes complets)");
 
     subplot(4, 2, 4); % Sélectionne le quatrième cadran de la fenêtre
     imhist(Iegalisation);
@@ -69,7 +69,7 @@ function Iegalisation = egalisation (I)
     subplot(4, 2, 5); % Sélectionne le cinquième cadran de la fenêtre
     imhist(I);
     axis([-inf +inf 0 100]);
-    title("Histogramme image base (axes tronqués)");
+    title("Histogramme image originale (axes tronqués)");
 
     subplot(4, 2, 6); % Sélectionne le sixième cadran de la fenêtre
     imhist(Iegalisation);
@@ -85,7 +85,7 @@ function Iegalisation = egalisation (I)
 
     subplot(4, 2, 8); % Sélectionne le huitième cadran de la fenêtre
     plot(HCN);
-    title("HCN de l'image égalisée");
+    title("HCN image égalisée");
     axis([1 256 0 1]); % Index allant de 1 à 256
 
 end
