@@ -1,12 +1,12 @@
 function Ispecification = specification (Ix, Iz)
-    [nbLignes_ix, nbColonnes_ix, can_ix] = size(Ix); % m=nb lignes, n=nb colonnes, can=nb canaux
+    [nbLignes_ix, nbColonnes_ix, can_ix] = size(Ix);
     if(can_ix > 1)
-        Ix = rgb2gray(Ix); % si l’image est en couleur, la transformer en NG
+        Ix = rgb2gray(Ix); % Si l’image est en couleur, la transformer en niveau de gris
     end
 
-    [nbLignes_iz, nbColonnes_iz, can_iz] = size(Iz); % m=nb lignes, n=nb colonnes, can=nb canaux
+    [nbLignes_iz, nbColonnes_iz, can_iz] = size(Iz);
     if(can_iz > 1)
-        Iz = rgb2gray(Iz); % si l’image est en couleur, la transformer en NG
+        Iz = rgb2gray(Iz); % Si l’image est en couleur, la transformer en niveau de gris
     end
 
     % -------------------------------------------
@@ -22,11 +22,12 @@ function Ispecification = specification (Ix, Iz)
     % --------------------------------------------------
     LUT = zeros(256, 1, 'uint8');
 
-    for i = 1:256
+    for i = 1:256 % Parcourt l'histogramme cumulé de l'image source
         iNGC = HC_x(i);
-        diff = realmax;
-        for j = 1:256
+        diff = realmax; % Initialise la différence à la valeur maximum d'un double
+        for j = 1:256 % Parcourt l'histogramme cumulé de l'image de référence
             jNGC = HC_z(j);
+			% Valeur absolue car la différence peut être négative ou positive
             if abs(iNGC - jNGC) < diff
                 diff = abs(iNGC - jNGC);
                 nouveauNG = j - 1;
@@ -42,39 +43,39 @@ function Ispecification = specification (Ix, Iz)
     % ---------
     figure;
 
-    subplot(4, 2, 1); %sélectionne le premier cadran de la fenêtre
+    subplot(4, 2, 1); % Sélectionne le premier cadran de la fenêtre
     imshow(Ix);
     title("Image source");
 
-    subplot(4, 2, 2); %sélectionne le deuxième cadran de la fenêtre
+    subplot(4, 2, 2); % Sélectionne le deuxième cadran de la fenêtre
     imshow(Iz)
     title("Image de référence");
 
-    subplot(4, 2, 3); %sélectionne le troisième cadran de la fenêtre
+    subplot(4, 2, 3); % Sélectionne le troisième cadran de la fenêtre
     imhist(Ix);
     axis([-inf +inf -inf +inf]);
     title("Histogramme image source");
 
-    subplot(4, 2, 4); %sélectionne le quatrième cadran de la fenêtre
+    subplot(4, 2, 4); % Sélectionne le quatrième cadran de la fenêtre
     imhist(Iz);
     axis([-inf +inf -inf +inf]);
     title("Histogramme image de référence");
 
-    subplot(4, 2, 5); %sélectionne le cinquième cadran de la fenêtre
+    subplot(4, 2, 5); % Sélectionne le cinquième cadran de la fenêtre
     plot(HC_x);
     axis([-inf +inf -inf +inf]);
     title("Histogramme cumulé image source");
 
-    subplot(4, 2, 6); %sélectionne le sixième cadran de la fenêtre
+    subplot(4, 2, 6); % Sélectionne le sixième cadran de la fenêtre
     plot(HC_z);
     axis([-inf +inf -inf +inf]);
     title("Histogramme cumulé image de référence");
 
-    subplot(4, 2, 7); %sélectionne le septième cadran de la fenêtre
+    subplot(4, 2, 7); % Sélectionne le septième cadran de la fenêtre
     imshow(Ispecification);
     title("Image obtenue par la spécification");
 
-    subplot(4, 2, 8); %sélectionne le huitième cadran de la fenêtre
+    subplot(4, 2, 8); % Sélectionne le huitième cadran de la fenêtre
     imhist(Ispecification);
     title("Histogramme de l'image obtenue par la spécification");
     axis([-inf +inf -inf +inf]);
